@@ -28,6 +28,7 @@ namespace ToDo
                 }
             } while ((Menu)menuSelected != Menu.Exit);
         }
+
         /// <summary>
         /// Show the main menu 
         /// </summary>
@@ -56,15 +57,22 @@ namespace ToDo
                 string idTaskSelected = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(idTaskSelected) - 1;
-                if (indexToRemove > -1 && TaskList.Count > 0)
+
+                if (indexToRemove > (TaskList.Count -1) || indexToRemove < 0)
+                    Console.WriteLine("Numero de tarea fuera de rango");
+                else
                 {
-                    string taskSelected = TaskList[indexToRemove];
-                    TaskList.RemoveAt(indexToRemove);
-                    Console.WriteLine("Tarea " + taskSelected + " eliminada");
+                    if (indexToRemove > -1 && TaskList.Count > 0)
+                    {
+                        string taskSelected = TaskList[indexToRemove];
+                        TaskList.RemoveAt(indexToRemove);
+                        Console.WriteLine("Tarea " + taskSelected + " eliminada");
+                    }
                 }
             }
             catch (Exception)
             {
+                Console.WriteLine($"Ha ocurrido un error al eliminar la tarea");
             }
         }
 
@@ -79,6 +87,7 @@ namespace ToDo
             }
             catch (Exception)
             {
+                Console.WriteLine("Ha ocurrido un error al intentar registrar la nueva tarea");
             }
         }
 
