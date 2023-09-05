@@ -26,7 +26,7 @@ namespace ToDo
                 {
                     ShowMenuTaskList();
                 }
-            } while ((Menu)menuSelected == Menu.Exit);
+            } while ((Menu)menuSelected != Menu.Exit);
         }
         /// <summary>
         /// Show the main menu 
@@ -34,7 +34,7 @@ namespace ToDo
         /// <returns>Returns option indicated by user</returns>
         public static int ShowMainMenu()
         {
-            Console.WriteLine("----------------------------------------");
+            PrintSeparatorLine();
             Console.WriteLine("Ingrese la opción a realizar: ");
             Console.WriteLine("1. Nueva tarea");
             Console.WriteLine("2. Remover tarea");
@@ -50,13 +50,7 @@ namespace ToDo
         {
             try
             {
-                Console.WriteLine("Ingrese el número de la tarea a remover: ");
-                // Show current taks
-                for (int i = 0; i < TaskList.Count; i++)
-                {
-                    Console.WriteLine((i + 1) + ". " + TaskList[i]);
-                }
-                Console.WriteLine("----------------------------------------");
+                ShowTaskList();
 
                 string idTaskSelected = Console.ReadLine();
                 // Remove one position
@@ -92,22 +86,37 @@ namespace ToDo
 
         public static void ShowMenuTaskList()
         {
+            ShowTaskList();
+        }
+
+        /// <summary>
+        /// Mostrar lista de tareas registradas
+        /// </summary>
+        public static void ShowTaskList()
+        {
             if (TaskList == null || TaskList.Count == 0)
             {
                 Console.WriteLine("No hay tareas por realizar");
             } 
             else
             {
-                Console.WriteLine("----------------------------------------");
+                PrintSeparatorLine();
                 for (int i = 0; i < TaskList.Count; i++)
                 {
                     Console.WriteLine((i + 1) + ". " + TaskList[i]);
                 }
-                Console.WriteLine("----------------------------------------");
+                PrintSeparatorLine();
             }
         }
-    }
 
+        /// <summary>
+        /// Imprimir Linea separadora
+        /// </summary>
+        public static void PrintSeparatorLine()
+        {
+             Console.WriteLine("----------------------------------------");
+        }
+    }
     public enum Menu
     {
         Add = 1,
