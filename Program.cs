@@ -5,11 +5,10 @@ namespace ToDo
 {
     internal class Program
     {
-        public static List<string> TaskList { get; set; }
+        public static List<string> TaskList { get; set; } = new List<string>();
 
         static void Main(string[] args)
         {
-            TaskList = new List<string>();
             int menuSelected = 0;
             do
             {
@@ -66,7 +65,7 @@ namespace ToDo
                     {
                         string taskSelected = TaskList[indexToRemove];
                         TaskList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + taskSelected + " eliminada");
+                        Console.WriteLine($"Tarea {taskSelected} eliminada");
                     }
                 }
             }
@@ -101,11 +100,7 @@ namespace ToDo
         /// </summary>
         public static void ShowTaskList()
         {
-            if (TaskList == null || TaskList.Count == 0)
-            {
-                Console.WriteLine("No hay tareas por realizar");
-            } 
-            else
+            if (TaskList?.Count > 0)
             {
                 PrintSeparatorLine();
 
@@ -113,6 +108,10 @@ namespace ToDo
                 TaskList.ForEach(t => { Console.WriteLine($"{indexTask++}. {t}");});
 
                 PrintSeparatorLine();
+            } 
+            else
+            {
+                Console.WriteLine("No hay tareas por realizar");
             }
         }
 
